@@ -1,3 +1,6 @@
 btsiirto/Lib/
 btsiirto/Scripts/
 btsiirto/Include/
+btsiirto/client.py
+btsiirto/send_data_kaksi.py
+btsiirto/pyvenv
