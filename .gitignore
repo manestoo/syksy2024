@@ -4,3 +4,4 @@ btsiirto/Include/
 btsiirto/client.py
 btsiirto/send_data_kaksi.py
 btsiirto/pyvenv
+hae_tiedot/.env
