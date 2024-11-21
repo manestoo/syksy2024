@@ -40,8 +40,6 @@ LOG_MODULE_REGISTER(Lesson4_Exercise2, LOG_LEVEL_INF);
 /* STEP 17 - Define the interval at which you want to send data at */
 #define NOTIFY_INTERVAL 500
 static bool app_button_state;
-/* STEP 15 - Define the data you want to stream over Bluetooth LE */
-static uint32_t app_sensor_value = 100;
 
 uint32_t suunta = 0;
 
@@ -82,41 +80,39 @@ void send_data_thread(void)
 	}
 
 	while (1) {
-		struct Measurement m = readADCValue();
-		printk("x = %d,  y = %d,  z = %d, suunta = %d\n",m.x,m.y,m.z,suunta);
-		/* Send notification, the function sends notifications only if a client is subscribed */
-		//my_lbs_send_sensor_notify(app_sensor_value);
+		if (app_button_state) {
+            // Read the ADC values if the button is pressed
+            struct Measurement m = readADCValue();
+            printk("x = %d,  y = %d,  z = %d, suunta = %d\n", m.x, m.y, m.z, suunta);
 
-		my_lbs_send_sensor_notify(m.x);	//x
-		my_lbs_send_sensor_notify(m.y);	//y
-		my_lbs_send_sensor_notify(m.z);	//z
-		my_lbs_send_sensor_notify(suunta);
+            // Send notifications (only if a client is subscribed)
+            my_lbs_send_sensor_notify(m.x);  // x
+            my_lbs_send_sensor_notify(m.y);  // y
+            my_lbs_send_sensor_notify(m.z);  // z
+            my_lbs_send_sensor_notify(suunta);
 
-		k_sleep(K_MSEC(NOTIFY_INTERVAL));
+            // Sleep for a period before checking the button state again
+            k_sleep(K_MSEC(NOTIFY_INTERVAL));
+        } else {
+            // Button is not pressed, just sleep briefly before checking again
+            k_sleep(K_MSEC(100)); // Sleep for 100ms to avoid busy-waiting
+        }
 	}
 }
+
+static void button_changed(uint32_t button_state, uint32_t has_changed)
+{
+    if (has_changed & USER_BUTTON) {
+        // Check if the button is pressed or released
+        app_button_state = (button_state & USER_BUTTON) != 0;
+    }
+}
+
 
 static struct my_lbs_cb app_callbacks = {
 	.led_cb = app_led_cb,
 	.button_cb = app_button_cb,
 };
-
-static void button_changed(uint32_t button_state, uint32_t has_changed)
-{
-	if (has_changed & USER_BUTTON) {
-		
-		uint32_t user_button_state = button_state & USER_BUTTON;
-		my_lbs_send_button_state_indicate(user_button_state);
-		app_button_state = user_button_state ? true : false;
-
-		if (user_button_state){
-			suunta ++;
-			if (suunta > 5) {
-				suunta = 0;
-			}
-		}
-	}
-}
 
 
 static void on_connected(struct bt_conn *conn, uint8_t err)
