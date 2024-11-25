@@ -4,9 +4,9 @@
 - nRF5340 Development Kit
 - Rasberry Pi
 - GY-61 ADXL335 kiihtyvyysanturi
-
 - Linux-palvelin tietokantaa varten
-- Python-ohjelmat sensoridatan lähetystä sekä vastaanottoa varten nRF:ssä sekä Rasberryssä
+- MySQL-tietokanta
+- Python-ohjelmat Rasberrylle sensoridatan lähetystä sekä vastaanottoa varten
 
 ### Projektin tavoite:
 Mitata kiihtyvyysanturilla dataa x-, y- ja z-akselilta. Data lähetetään sitten Bluetoothin kautta Rasberrylle Pille. Rasberry on yhdistettynä lähiverkkoon ethernet-kaapelilla, ja se vastaanottaa sensoridatan ja lähettää sen lähiverkossa sijaitsevaan tietokantaan. Tietokantaan tallennettua dataa käytetään sitten koneoppimisen parissa.
