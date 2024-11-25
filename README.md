@@ -19,3 +19,4 @@ Mitata kiihtyvyysanturilla dataa x-, y- ja z-akselilta. Data lähetetään sitte
 Suurin haaste tähän asti oli saada Raspberrylle dataa vastaanottava ja lähettävä koodi. Datan vastaanottaminen oli helppoa nRF:ltä, mutta datan lähettämisessä tietokantaan tuli ongelmia. X-, y- ja z-akselin sensoridata tallentui aluksi tietokantaan kummallisen suurina arvoina, sekä sinne tallentui virheellisesti samoja arvoja useita kertoja. Pitkän pähkäilyn jälkeen asia korjaantuikin, kun kiihtyvyysanturiin menevä pin nRF-laitteesta vaihdettiin 5V -> VCC.
 
 
+![Datan_kulku](https://github.com/user-attachments/assets/91382a94-d39f-4224-85d5-0451f590b7eb)
