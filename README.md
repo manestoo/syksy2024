@@ -1,6 +1,6 @@
 # Tietoliikenteen sovellusprojekti
 
-###Projektin komponentit:
+### Projektin komponentit:
 - nRF5340 Development Kit
 - Rasberry Pi
 
