@@ -1,4 +1,4 @@
-# Tietoliikenteen sovellusprojekti
+# Suunnantunnistus projekti
 
 ### Laitteisto ja teknologia:
 - nRF5340 Development Kit
